@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [ProductController::class, "index"]);
 
-Route::get("/product/{id}", function () {
-    return view("product");
-});
+Route::get("/product/{product}", [ProductController::class, "show"]);
 
 Route::get("/checkout", function () {
     return view("checkout");
