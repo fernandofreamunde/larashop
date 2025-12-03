@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,11 @@ Route::get('/checkout', function () {
     return view('checkout');
 });
 
-Route::get('/orders/{id}', function () {
-    return view('order-history-detail');
-});
-
-Route::get('/orders', function () {
-    return view('order-history');
-});
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name(
+    'orders.show',
+);
 
 Route::get('/login', function () {
     return view('login');
