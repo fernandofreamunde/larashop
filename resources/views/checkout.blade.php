@@ -13,7 +13,7 @@
           <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
 
           <div class="mt-4">
-              <x-forms.input label="Email address" name="email" />
+              <x-forms.input label="Email address" name="email" :value="$customer?->email" />
           </div>
         </div>
 
@@ -24,15 +24,15 @@
 
           <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <div>
-              <x-forms.input label="First name" name="first-name" />
+              <x-forms.input label="First name" name="first-name" :value="$customer?->first_name" />
             </div>
 
             <div>
-              <x-forms.input label="Last name" name="last-name" />
+              <x-forms.input label="Last name" name="last-name" :value="$customer?->last_name" />
             </div>
 
             <div class="sm:col-span-2">
-                <x-forms.input label="Company" name="company" />
+                <x-forms.input label="Company" name="company" :value="$customer?->company" />
             </div>
 
             <div class="sm:col-span-2">

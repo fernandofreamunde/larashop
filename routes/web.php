@@ -14,7 +14,14 @@ Route::patch('/cart/{productId}', [CartController::class, 'update']);
 Route::delete('/cart/{productId}', [CartController::class, 'destroy']);
 
 Route::get('/checkout', function () {
-    return view('checkout');
+    $customer = null;
+    $email = session('customer_email');
+
+    if ($email) {
+        $customer = \App\Models\Customer::where('email', $email)->first();
+    }
+
+    return view('checkout', ['customer' => $customer]);
 });
 
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
