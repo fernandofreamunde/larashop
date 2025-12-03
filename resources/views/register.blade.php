@@ -11,23 +11,23 @@
       <form action="{{ route('register') }}" method="POST" class="space-y-6">
         @csrf
         <div>
-            <x-forms.input label="First name" name="first_name" />
+            <x-forms.input label="First name" name="first_name" :required="true" />
         </div>
 
         <div>
-            <x-forms.input label="Last name" name="last_name" />
+            <x-forms.input label="Last name" name="last_name" :required="true" />
         </div>
 
         <div>
-            <x-forms.input label="Email address" name="email" />
+            <x-forms.input label="Email address" name="email" :required="true" />
         </div>
 
         <div>
-                <x-forms.input label="Password" name="password" />
+                <x-forms.input label="Password" name="password" :required="true" />
         </div>
 
         <div>
-              <x-forms.input label="Confirm password" name="password_confirmation" />
+              <x-forms.input label="Confirm password" name="password_confirmation" :required="true" />
         </div>
 
         <div>

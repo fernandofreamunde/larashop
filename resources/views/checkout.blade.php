@@ -13,7 +13,7 @@
           <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
 
           <div class="mt-4">
-              <x-forms.input label="Email address" name="email" :value="$customer?->email" />
+              <x-forms.input label="Email address" name="email" :value="$customer?->email" :required="true" />
           </div>
         </div>
 
@@ -24,19 +24,19 @@
 
           <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <div>
-              <x-forms.input label="First name" name="first-name" :value="$customer?->first_name" />
+              <x-forms.input label="First name" name="first-name" :value="$customer?->first_name" :required="true" />
             </div>
 
             <div>
-              <x-forms.input label="Last name" name="last-name" :value="$customer?->last_name" />
+              <x-forms.input label="Last name" name="last-name" :value="$customer?->last_name" :required="true" />
             </div>
 
             <div class="sm:col-span-2">
-                <x-forms.input label="Company" name="company" :value="$customer?->company" />
+                <x-forms.input label="Company" name="company" :value="$customer?->company" :required="true" />
             </div>
 
             <div class="sm:col-span-2">
-                <x-forms.input label="Address" name="address" />
+                <x-forms.input label="Address" name="address" :required="true" />
             </div>
 
             <div class="sm:col-span-2">
@@ -44,15 +44,15 @@
             </div>
 
             <div>
-              <x-forms.input label="City" name="city" />
+              <x-forms.input label="City" name="city" :required="true" />
             </div>
 
             <div>
-                <x-forms.input label="Country" name="country" />
+                <x-forms.input label="Country" name="country" :required="true" />
             </div>
 
             <div>
-              <x-forms.input label="Postal Code" name="postal-code" />
+              <x-forms.input label="Postal Code" name="postal-code" :required="true" />
             </div>
           </div>
         </div>
