@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -53,5 +54,7 @@ class DatabaseSeeder extends Seeder
             "image_url" => "/assets/cap.jpg",
             "price" => 45.55,
         ]);
+
+        Order::factory()->withItems()->count(10)->create();
     }
 }
