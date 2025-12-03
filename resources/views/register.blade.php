@@ -3,12 +3,21 @@
 @section('content')
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" class="mx-auto h-10 w-auto" />
-    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+    <img src="/assets/logo.png" alt="{{ config('app.name') }}" class="mx-auto h-10 w-auto" />
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Create your account</h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form action="#" method="POST" class="space-y-6">
+      <form action="{{ route('register') }}" method="POST" class="space-y-6">
+        @csrf
+        <div>
+            <x-forms.input label="First name" name="first_name" />
+        </div>
+
+        <div>
+            <x-forms.input label="Last name" name="last_name" />
+        </div>
+
         <div>
             <x-forms.input label="Email address" name="email" />
         </div>

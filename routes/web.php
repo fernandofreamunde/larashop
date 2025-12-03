@@ -34,6 +34,5 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/register', function () {
-    return view('register');
-});
+Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('register');
+Route::post('/register', [App\Http\Controllers\UserController::class, 'store']);
