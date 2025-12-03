@@ -21,10 +21,10 @@
 
           <div class="space-y-6 border-t border-gray-200 px-4 py-6">
             @auth
-              <!-- TODO: Implement logout functionality -->
               <div class="flow-root">
-                <form action="#" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                   @csrf
+                  @method('DELETE')
                   <button type="submit" class="-m-2 block p-2 font-medium text-gray-900 w-full text-left">Logout</button>
                 </form>
               </div>
@@ -67,9 +67,9 @@
           <div class="ml-auto flex items-center">
             <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
               @auth
-                <!-- TODO: Implement logout functionality -->
-                <form action="#" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                   @csrf
+                  @method('DELETE')
                   <button type="submit" class="text-sm font-medium text-gray-700 hover:text-gray-800">Logout</button>
                 </form>
               @else

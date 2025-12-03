@@ -8,7 +8,8 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form action="#" method="POST" class="space-y-6">
+    <form action="{{ route('login') }}" method="POST" class="space-y-6">
+      @csrf
       <div>
           <x-forms.input label="Email address" name="email" />
       </div>

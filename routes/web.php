@@ -30,9 +30,9 @@ Route::get('/orders/{order}', [OrderController::class, 'show'])->name(
     'orders.show',
 );
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', [App\Http\Controllers\SessionController::class, 'create'])->name('login');
+Route::post('/login', [App\Http\Controllers\SessionController::class, 'store']);
+Route::delete('/logout', [App\Http\Controllers\SessionController::class, 'destroy'])->name('logout');
 
 Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('register');
 Route::post('/register', [App\Http\Controllers\UserController::class, 'store']);
