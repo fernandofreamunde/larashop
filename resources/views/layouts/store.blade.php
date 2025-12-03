@@ -64,7 +64,11 @@
                                     <p class="text-gray-500">Qty {{ $item['quantity'] }}</p>
 
                                     <div class="flex">
-                                      <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                      <form action="{{ url('/cart/' . $productId) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                      </form>
                                     </div>
                                   </div>
                                 </div>

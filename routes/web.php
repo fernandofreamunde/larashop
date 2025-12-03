@@ -9,6 +9,8 @@ Route::get('/', [ProductController::class, 'index']);
 Route::get('/product/{product}', [ProductController::class, 'show']);
 
 Route::post('/cart', [CartController::class, 'store']);
+Route::patch('/cart/{productId}', [CartController::class, 'update']);
+Route::delete('/cart/{productId}', [CartController::class, 'destroy']);
 
 Route::get('/checkout', function () {
     return view('checkout');
