@@ -1,15 +1,9 @@
 @extends('layouts.store')
 
 @section('content')
-<x-product-list >
+<x-product-list>
     @foreach($products as $product)
-    <x-product-list-item
-        id="{{ $product->id }}"
-        :name="$product->name"
-        :description="$product->description"
-        price="{{ $product->price }}"
-        imageUrl="{{ $product->image_url }}"
-    />
+        <x-product-list-item :$product />
     @endforeach
-</ x-product-list>
+</x-product-list>
 @endsection
