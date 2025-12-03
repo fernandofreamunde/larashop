@@ -21,19 +21,10 @@
 
           <div class="space-y-6 border-t border-gray-200 px-4 py-6">
             <div class="flow-root">
-              <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Women</a>
+              <a href="/login" class="-m-2 block p-2 font-medium text-gray-900">Sign in</a>
             </div>
             <div class="flow-root">
-              <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Men</a>
-            </div>
-            <div class="flow-root">
-              <hr />
-            </div>
-            <div class="flow-root">
-              <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Sign in</a>
-            </div>
-            <div class="flow-root">
-              <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Create account</a>
+              <a href="/register" class="-m-2 block p-2 font-medium text-gray-900">Create account</a>
             </div>
           </div>
 
@@ -63,31 +54,21 @@
             </a>
           </div>
 
-          <!-- Flyout menus -->
-          <el-popover-group class="group/popover-group hidden lg:ml-8 lg:block lg:self-stretch">
-            <div class="flex h-full space-x-8">
-              <div class="group/popover flex">
-                <div class="relative flex">
-                  <button popovertarget="desktop-menu-women" class="relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out group-not-has-open/popover:text-gray-700 group-has-open/popover:text-indigo-600 group-not-has-open/popover:hover:text-gray-800">
-                    Women
-                  </button>
-                </div>
-              </div>
-              <div class="group/popover flex">
-                <div class="relative flex">
-                  <button popovertarget="desktop-menu-men" class="relative flex items-center justify-center text-sm font-medium transition-colors duration-200 ease-out group-not-has-open/popover:text-gray-700 group-has-open/popover:text-indigo-600 group-not-has-open/popover:hover:text-gray-800">
-                    Men
-                  </button>
-                </div>
-              </div>
-            </div>
-          </el-popover-group>
-
           <div class="ml-auto flex items-center">
             <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
               <a href="/login" class="text-sm font-medium text-gray-700 hover:text-gray-800">Sign in</a>
               <span aria-hidden="true" class="h-6 w-px bg-gray-200"></span>
               <a href="/register" class="text-sm font-medium text-gray-700 hover:text-gray-800">Create account</a>
+            </div>
+
+            <!-- Order History -->
+            <div class="ml-4 flow-root lg:ml-6">
+              <a href="/orders" class="group -m-2 flex items-center p-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 shrink-0 text-gray-400 group-hover:text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span class="sr-only">order history</span>
+              </a>
             </div>
 
             <!-- Cart -->
