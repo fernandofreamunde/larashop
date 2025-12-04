@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\User;
+// use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'first_name' => 'Test User',
-            'email' => 'test@example.com',
-            'isShopkeeper' => true,
-        ]);
+        // User::factory()->create([
+        //     'first_name' => 'Test User',
+        //     'email' => 'test@example.com',
+        //     'isShopkeeper' => true,
+        // ]);
 
-        Product::factory()->create([
+        Product::create([
             'name' => "Woman's t-shirt",
             'description' => implode("\n", [
                 'Fancy white t-shirt for girls that love the summer.',
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             'price' => 35.99,
         ]);
 
-        Product::factory()->create([
+        Product::create([
             'name' => "Men's t-shirt",
             'description' => implode("\n", [
                 'Nice black t-shirt for guys that enjoy to exercise.',
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'price' => 35.99,
         ]);
 
-        Product::factory()->create([
+        Product::create([
             'name' => 'Unisex Cap',
             'description' => implode("\n", [
                 'For that sunny day in the Netherlands summer.',
