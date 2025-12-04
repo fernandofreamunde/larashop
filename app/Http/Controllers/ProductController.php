@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view("welcome", ["products" => Product::all()]);
+        return view('welcome', ['products' => Product::all()]);
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view("product", ["product" => $product]);
+        return view('product', ['product' => $product]);
     }
 
     /**

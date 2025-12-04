@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -13,16 +14,7 @@ Route::post('/cart', [CartController::class, 'store']);
 Route::patch('/cart/{productId}', [CartController::class, 'update']);
 Route::delete('/cart/{productId}', [CartController::class, 'destroy']);
 
-Route::get('/checkout', function () {
-    $customer = null;
-    $email = session('customer_email');
-
-    if ($email) {
-        $customer = \App\Models\Customer::where('email', $email)->first();
-    }
-
-    return view('checkout', ['customer' => $customer]);
-});
+Route::get('/checkout', CheckoutController::class);
 
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

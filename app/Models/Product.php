@@ -12,21 +12,21 @@ class Product extends Model
     use HasFactory;
 
     protected $casts = [
-        "price" => "integer",
+        'price' => 'integer',
     ];
 
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => (int) round((float) $value * 100),
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => (int) round((float) $value * 100),
         );
     }
 
     protected function formattedPrice(): Attribute
     {
         return Attribute::make(
-            get: fn() => number_format($this->price / 100, 2),
+            get: fn () => number_format($this->price / 100, 2),
         );
     }
 }

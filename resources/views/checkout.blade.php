@@ -32,7 +32,7 @@
             </div>
 
             <div class="sm:col-span-2">
-                <x-forms.input label="Company" name="company" :value="$customer?->company" :required="true" />
+                <x-forms.input label="Company" name="company" :value="$customer?->company" :required="false" />
             </div>
 
             <div class="sm:col-span-2">

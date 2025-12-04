@@ -24,13 +24,13 @@ class OrderDetailsFactory extends Factory
         $currentPrice = (int) round($product->price * 100);
 
         return [
-            "order_id" => Order::factory(),
-            "product_id" => $product->id,
-            "quantity" => $quantity,
-            "current_price" => $currentPrice,
-            "current_name" => $product->name,
-            "current_description" => $product->description,
-            "sub_total" => $currentPrice * $quantity,
+            'order_id' => Order::factory(),
+            'product_id' => $product->id,
+            'quantity' => $quantity,
+            'current_price' => $currentPrice,
+            'current_name' => $product->name,
+            'current_description' => $product->description,
+            'sub_total' => $currentPrice * $quantity,
         ];
     }
 }

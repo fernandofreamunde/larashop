@@ -8,16 +8,16 @@ class CartComposer
 {
     public function compose(View $view): void
     {
-        $cart = session()->get("cart", []);
+        $cart = session()->get('cart', []);
         $cartCount = count($cart);
         $cartTotal = array_sum(
-            array_map(fn($item) => $item["price"] * $item["quantity"], $cart),
+            array_map(fn ($item) => $item['price'] * $item['quantity'], $cart),
         );
 
         $view->with([
-            "cart" => $cart,
-            "cartCount" => $cartCount,
-            "cartTotal" => $cartTotal,
+            'cart' => $cart,
+            'cartCount' => $cartCount,
+            'cartTotal' => $cartTotal,
         ]);
     }
 }

@@ -23,15 +23,15 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "required|email|max:255",
-            "first-name" => "required|string|max:255",
-            "last-name" => "required|string|max:255",
-            "company" => "string|max:255",
-            "address" => "required|string|max:500",
-            "apt-number" => "nullable|string|max:50",
-            "city" => "required|string|max:255",
-            "country" => "required|string|max:255",
-            "postal-code" => "required|string|max:20",
+            'email' => 'required|email|max:255',
+            'first-name' => 'required|string|max:255',
+            'last-name' => 'required|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'address' => 'required|string|max:500',
+            'apt-number' => 'nullable|string|max:50',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'postal-code' => 'required|string|max:20',
         ];
     }
 }

@@ -17,10 +17,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->word(),
-            "description" => implode("\n", fake()->paragraphs(3)),
-            "image_url" => "/assets/cap.jpg",
-            "price" => fake()->randomFloat(2, 10, 100),
+            'name' => fake()->word(),
+            'description' => implode("\n", fake()->paragraphs(3)),
+            'image_url' => '/assets/cap.jpg',
+            'price' => fake()->randomFloat(2, 10, 100),
         ];
     }
 }

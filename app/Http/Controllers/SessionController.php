@@ -9,25 +9,25 @@ class SessionController extends Controller
 {
     public function create()
     {
-        return view("login");
+        return view('login');
     }
 
     public function store()
     {
         $attributes = request()->validate([
-            "email" => ["required", "email"],
-            "password" => ["required"],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        if (!Auth::attempt($attributes)) {
+        if (! Auth::attempt($attributes)) {
             throw ValidationException::withMessages([
-                "email" => "Sorry, those credentials do not match.",
+                'email' => 'Sorry, those credentials do not match.',
             ]);
         }
 
         request()->session()->regenerate();
 
-        return redirect("/");
+        return redirect('/');
     }
 
     public function destroy()
@@ -37,6 +37,6 @@ class SessionController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect("/");
+        return redirect('/');
     }
 }
