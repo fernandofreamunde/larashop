@@ -5,6 +5,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+beforeEach(function () {
+    $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
+});
+
 // Adding products to cart
 test('can add product to empty cart', function () {
     $product = Product::factory()->create(['price' => 2999]);
@@ -49,7 +53,7 @@ test('adding same product increments quantity', function () {
 test('cart stores correct product data', function () {
     $product = Product::factory()->create([
         'name' => 'Test Product',
-        'price' => 2999,
+        'price' => 29.99,
         'image_url' => 'https://example.com/image.jpg',
         'description' => 'Test Description',
     ]);
@@ -164,8 +168,8 @@ test('cart persists in session across requests', function () {
 
 // Cart calculations
 test('cart total calculates correctly with multiple items', function () {
-    $product1 = Product::factory()->create(['price' => 2999]); // €29.99
-    $product2 = Product::factory()->create(['price' => 1499]); // €14.99
+    $product1 = Product::factory()->create(['price' => 29.99]); // €29.99
+    $product2 = Product::factory()->create(['price' => 14.99]); // €14.99
 
     $this->post('/cart', ['product_id' => $product1->id, 'quantity' => 2]);
     $this->post('/cart', ['product_id' => $product2->id, 'quantity' => 3]);
@@ -173,7 +177,7 @@ test('cart total calculates correctly with multiple items', function () {
     $cart = session('cart');
     $total = array_sum(array_map(fn ($item) => $item['price'] * $item['quantity'], $cart));
 
-    expect($total)->toBe(104.95); // (29.99 * 2) + (14.99 * 3)
+    expect(round($total, 2))->toBe(104.95); // (29.99 * 2) + (14.99 * 3)
 });
 
 // Edge cases
@@ -195,12 +199,12 @@ test('removing last item empties cart', function () {
 });
 
 test('cart handles price changes', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     $this->post('/cart', ['product_id' => $product->id, 'quantity' => 1]);
 
     // Simulate price change
-    $product->update(['price' => 3999]);
+    $product->update(['price' => 39.99]);
 
     $cart = session('cart');
     // Cart should still have old price (uses current price at time of adding)

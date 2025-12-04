@@ -12,20 +12,22 @@ class CartController extends Controller
     {
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1|max:99',
         ]);
 
         $productId = $validated['product_id'];
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
-            $cart[$productId]['quantity']++;
+            $cart[$productId]['quantity'] += $validated['quantity'];
         } else {
             $product = Product::findOrFail($productId);
             $cart[$productId] = [
                 'name' => $product->name,
                 'price' => $product->price,
                 'image_url' => $product->image_url,
-                'quantity' => 1,
+                'description' => $product->description,
+                'quantity' => $validated['quantity'],
             ];
         }
 
