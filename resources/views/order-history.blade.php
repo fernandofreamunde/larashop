@@ -32,6 +32,12 @@
                       <div class="text-sm font-medium text-gray-900">Total amount</div>
                       <div class="mt-1 text-sm text-gray-500">€{{ number_format($order->total / 100, 2) }}</div>
                     </div>
+                    <div>
+                      <div class="text-sm font-medium text-gray-900">Status</div>
+                      <div class="mt-1">
+                        <x-order-status-badge :status="$order->status" />
+                      </div>
+                    </div>
                   </div>
                   <div class="mt-6 flex space-x-4 sm:mt-0">
                     <a href="{{ route('orders.show', $order->id) }}" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-xs hover:bg-gray-50">View Order</a>
