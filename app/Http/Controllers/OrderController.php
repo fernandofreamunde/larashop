@@ -26,14 +26,14 @@ class OrderController extends Controller
             $customer->update([
                 'first_name' => $validated['first-name'],
                 'last_name' => $validated['last-name'],
-                'company' => $validated['company'],
+                'company' => $validated['company'] ?? null,
             ]);
         } else {
             $customer = Customer::create([
                 'email' => $validated['email'],
                 'first_name' => $validated['first-name'],
                 'last_name' => $validated['last-name'],
-                'company' => $validated['company'],
+                'company' => $validated['company'] ?? null,
             ]);
         }
 

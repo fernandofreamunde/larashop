@@ -9,9 +9,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+beforeEach(function () {
+    $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
+});
+
 // Basic order creation
 test('guest can create order with valid cart and shipping details', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     session(['cart' => [
         $product->id => [
@@ -42,7 +46,7 @@ test('guest can create order with valid cart and shipping details', function () 
 test('authenticated user can create order', function () {
     $user = User::factory()->create();
     $customer = Customer::factory()->create(['user_id' => $user->id, 'email' => $user->email]);
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     $this->actingAs($user);
 
@@ -72,7 +76,7 @@ test('authenticated user can create order', function () {
 
 // Customer creation/update
 test('order creation creates new customer if email doesnt exist', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
@@ -99,7 +103,7 @@ test('order creation updates existing customer if email exists', function () {
         'last_name' => 'Name',
     ]);
 
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $this->post('/orders', [
@@ -120,7 +124,7 @@ test('order creation updates existing customer if email exists', function () {
 // Order data
 test('order stores correct customer_id reference', function () {
     $customer = Customer::factory()->create(['email' => 'test@example.com']);
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
@@ -139,7 +143,7 @@ test('order stores correct customer_id reference', function () {
 });
 
 test('order stores correct total in cents', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => 29.99, 'quantity' => 2, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
@@ -158,7 +162,7 @@ test('order stores correct total in cents', function () {
 });
 
 test('order stores all shipping details', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $this->post('/orders', [
@@ -182,7 +186,7 @@ test('order stores all shipping details', function () {
 
 // OrderDetails creation
 test('order creates OrderDetails for each cart item', function () {
-    $product1 = Product::factory()->create(['price' => 2999]);
+    $product1 = Product::factory()->create(['price' => 29.99]);
     $product2 = Product::factory()->create(['price' => 1499]);
 
     session(['cart' => [
@@ -229,7 +233,7 @@ test('OrderDetails store product snapshot', function () {
 });
 
 test('OrderDetails store correct quantity and sub_total', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
 
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => 29.99, 'quantity' => 3, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
@@ -250,7 +254,7 @@ test('OrderDetails store correct quantity and sub_total', function () {
 
 // Session and redirect behavior
 test('cart is cleared after order creation', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $this->post('/orders', [
@@ -267,7 +271,7 @@ test('cart is cleared after order creation', function () {
 });
 
 test('session customer_email is set after order', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $this->post('/orders', [
@@ -284,7 +288,7 @@ test('session customer_email is set after order', function () {
 });
 
 test('redirects to order confirmation page', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -302,7 +306,7 @@ test('redirects to order confirmation page', function () {
 });
 
 test('shows success flash message', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -319,7 +323,7 @@ test('shows success flash message', function () {
 });
 
 test('order status defaults to pending', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $this->post('/orders', [
@@ -356,7 +360,7 @@ test('cannot create order with empty cart', function () {
 });
 
 test('cannot create order without email', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -372,7 +376,7 @@ test('cannot create order without email', function () {
 });
 
 test('cannot create order with invalid email format', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -389,7 +393,7 @@ test('cannot create order with invalid email format', function () {
 });
 
 test('cannot create order without first name', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -405,7 +409,7 @@ test('cannot create order without first name', function () {
 });
 
 test('cannot create order without last name', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -421,7 +425,7 @@ test('cannot create order without last name', function () {
 });
 
 test('cannot create order without address', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -437,7 +441,7 @@ test('cannot create order without address', function () {
 });
 
 test('cannot create order without city', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -453,7 +457,7 @@ test('cannot create order without city', function () {
 });
 
 test('cannot create order without country', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -469,7 +473,7 @@ test('cannot create order without country', function () {
 });
 
 test('cannot create order without postal code', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -485,7 +489,7 @@ test('cannot create order without postal code', function () {
 });
 
 test('can create order without company (nullable)', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
@@ -503,7 +507,7 @@ test('can create order without company (nullable)', function () {
 });
 
 test('can create order without apt-number (nullable)', function () {
-    $product = Product::factory()->create(['price' => 2999]);
+    $product = Product::factory()->create(['price' => 29.99]);
     session(['cart' => [$product->id => ['name' => $product->name, 'price' => $product->price, 'quantity' => 1, 'image_url' => $product->image_url, 'description' => $product->description]]]);
 
     $response = $this->post('/orders', [
