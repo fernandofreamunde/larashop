@@ -49,7 +49,7 @@ Visit the live application: **[https://larashop-master-xhow8t.laravel.cloud/](ht
 - PHP 8.4 or higher
 - Composer
 - Node.js 20 or higher
-- MySQL or SQLite
+- SQLite
 - Git
 
 ### Installation Steps
@@ -96,19 +96,9 @@ Visit the live application: **[https://larashop-master-xhow8t.laravel.cloud/](ht
    - 3 products (Woman's t-shirt, Men's t-shirt, Unisex Cap)
    - Sample orders 
 
-7. **Build frontend assets**
+7. **Start the development server**
    ```bash
-   npm run build
-   ```
-
-   Or for development with hot reload:
-   ```bash
-   npm run dev
-   ```
-
-8. **Start the development server**
-   ```bash
-   php artisan serve
+   composer run dev
    ```
 
 9. **Visit the application**
@@ -117,7 +107,7 @@ Visit the live application: **[https://larashop-master-xhow8t.laravel.cloud/](ht
 
 ## 🧪 Testing
 
-The project includes comprehensive test coverage with **142 tests** covering:
+The project includes comprehensive test coverage:
 
 ### Run All Tests
 ```bash
@@ -162,35 +152,8 @@ The project includes automated testing on pull requests:
 
 ### Production Deployment
 
-1. Set `APP_ENV=production` in your `.env`
-2. Set `APP_DEBUG=false`
-3. Run optimizations:
-   ```bash
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   composer install --optimize-autoloader --no-dev
-   npm run build
-   ```
+The application is hosted on laravel.cloud and is deployed automatically every time a successful PR is merged.
 
-4. Run migrations:
-   ```bash
-   php artisan migrate --force
-   ```
-
-5. Seed products (safe for production - no faker dependencies):
-   ```bash
-   php artisan db:seed --force
-   ```
-
-### Clear All Caches
-```bash
-php artisan optimize:clear
-```
-
-### Reset Database
-```bash
-php artisan migrate:fresh --seed
 ```
 
 ## 📝 API Endpoints
@@ -218,9 +181,6 @@ php artisan migrate:fresh --seed
 ```bash
 npm run build
 ```
-
-### Session not persisting
-Check that `SESSION_DRIVER` in `.env` is set to `file` or `database`
 
 ### Tests failing locally but passing in CI
 Ensure you're running the same PHP version (8.4) and have run:
